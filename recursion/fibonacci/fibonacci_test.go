@@ -26,6 +26,13 @@ func BenchmarkIfibonacci3(b *testing.B) {
 	}
 }
 
+func BenchmarkCfibonacci(b *testing.B) {
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		fibonacci.Cfibonacci(data)
+	}
+}
+
 func BenchmarkRfibonacci(b *testing.B) {
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
