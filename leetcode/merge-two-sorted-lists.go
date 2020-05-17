@@ -1,30 +1,33 @@
 package main
 
+import "fmt"
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
 }
 
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	var result *ListNode = &ListNode{}
-	var tail *ListNode
-	if l1.Val < l2.Val {
-		result.Val = l1.Val
-		result.Next = l1.Next
-	} else {
-		result.Val = l2.Val
-		result.Next = l2.Next
+	if l1 == nil {
+		return l2
 	}
-	tail = result.Next
 
-	for l1.Next != nil && l2.Next != nil {
-		if l1.Val < l2.Val {
-			tail.Val = l1.Val
-			tail.Next = l1.Next
-		} else {
-			tail.Val = l2.Val
-			tail.Next = l2.Next
-		}
+	if l2 == nil {
+		return l1
 	}
-	return result
+
+	if l1.Val < l2.Val {
+		l1.Next = mergeTwoLists(l1.Next, l2)
+		return l1
+	}
+	l2.Next = mergeTwoLists(l1, l2.Next)
+	return l2
+}
+
+func Display(list *ListNode) {
+	for list != nil {
+		fmt.Printf("%v ->", list.Val)
+		list = list.Next
+	}
+	fmt.Println()
 }
