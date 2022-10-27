@@ -15,12 +15,13 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # [Optional] Uncomment the next lines to use go get to install anything else you need
 # USER vscode
 # RUN go get -x <your-dependency-or-tool>
-RUN go get -x github.com/pilu/fresh
+RUN go install github.com/pilu/fresh@latest
 
+# TODO: move vscode to a variable; for some reason $USER_NAME didn't work
 ENV USER_NAME vscode
-ENV HOME /home/$USER_NAME
+ENV HOME /home/vscode
 
-USER $USER_NAME
+USER vscode
 
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
 
