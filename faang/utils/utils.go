@@ -34,3 +34,18 @@ func CreateTree(m []interface{}) *TreeNode {
 
 	return nodes[0]
 }
+
+func max(x int, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+func MaxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return max(MaxDepth(root.Left), MaxDepth(root.Right)) + 1
+}
+
