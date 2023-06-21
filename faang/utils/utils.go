@@ -49,3 +49,9 @@ func MaxDepth(root *TreeNode) int {
 	return max(MaxDepth(root.Left), MaxDepth(root.Right)) + 1
 }
 
+func GetTreeHeight(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return GetTreeHeight(root.Left) + 1
+}
