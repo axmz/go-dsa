@@ -4,34 +4,48 @@ import (
 	"fmt"
 )
 
-func gcd(a, b int) int {
-	if b == 0 {
-		return a
+// func kidsWithCandies(candies []int, extraCandies int) []bool {
+// 	res := make([]bool, len(candies))
+// 	max := 0
+// 	for i, v := range candies {
+// 		if v > max {
+// 			max = v
+// 		}
+// 		candies[i] = v + extraCandies
+// 	}
+
+// 	for i := range res {
+// 		if candies[i] >= max {
+// 			res[i] = true
+// 		}
+// 	}
+
+//		return res
+//	}
+func kidsWithCandies(candies []int, extraCandies int) []bool {
+	res := make([]bool, len(candies))
+	max := 0
+	for _, v := range candies {
+		if v > max {
+			max = v
+		}
 	}
 
-	return gcd(b, a%b)
-}
+	compare := max - extraCandies
 
-func gcdOfStrings(str1 string, str2 string) string {
-	l1, l2 := len(str1), len(str2)
-	s := str1 + str2
-	if s != str2+str1 {
-		return ""
+	for i := range res {
+		if candies[i] >= compare {
+			res[i] = true
+		}
 	}
 
-	g := gcd(l1, l2)
-
-	return s[:g]
+	return res
 }
 
 func main() {
-	str1 := "ABCABC"
-	str2 := "ABC"
-	// str2 := "ABABAB"
-	// str1 := "ABAB"
-	// str1 := "TAUXXTAUXXTAUXXTAUXXTAUXX"
-	// str2 := "TAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXX"
+	candies := []int{2, 3, 5, 1, 3}
+	extraCandies := 3
 
-	res := gcdOfStrings(str1, str2)
+	res := kidsWithCandies(candies, extraCandies)
 	fmt.Println(res)
 }
