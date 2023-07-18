@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/go
 {
-	"name": "Go",
+	"name": "Go DSA",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
@@ -14,6 +14,7 @@
 		}
 	},
 	"runArgs": [
+		"--name=GoDSA",
 		"--cap-add=SYS_PTRACE",
 		"--security-opt",
 		"seccomp=unconfined",
