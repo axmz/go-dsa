@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math"
 )
 
@@ -113,4 +114,8 @@ func isCommonPrefix(strs []string, middle int) bool {
 		}
 	}
 	return true
+}
+
+func main() {
+	fmt.Println("Longest Common Prefix:", lcpBS([]string{"flower", "flow", "flight", "flood"}))
 }

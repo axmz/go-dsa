@@ -31,3 +31,10 @@ func Display(list *ListNode) {
 	}
 	fmt.Println()
 }
+
+func main() {
+	// Merge two sorted lists
+	fmt.Println("Merge two sorted lists:", mergeTwoLists(&ListNode{1, &ListNode{2, &ListNode{4, nil}}}, &ListNode{1, &ListNode{3, &ListNode{4, nil}}}))
+	// list := mergeTwoLists(&ListNode{1, &ListNode{2, &ListNode{4, nil}}}, &ListNode{1, &ListNode{3, &ListNode{4, nil}}})
+	// Display(list)
+}

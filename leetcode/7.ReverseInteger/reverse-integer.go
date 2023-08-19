@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math"
 )
 
@@ -23,4 +24,8 @@ func reverseInteger(x int) int {
 	}
 
 	return rev
+}
+
+func main() {
+	fmt.Println("Reverse Integer:", reverseInteger(-123))
 }

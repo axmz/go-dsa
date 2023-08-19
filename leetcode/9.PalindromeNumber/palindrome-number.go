@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // IsPalindrome palindrome
 func isPalindrome(x int) bool {
 	if x < 0 || x%10 == 0 {
@@ -13,4 +15,8 @@ func isPalindrome(x int) bool {
 	}
 
 	return res == x || x == res/10
+}
+
+func main() {
+	fmt.Println("Palindrome Number:", isPalindrome(121))
 }

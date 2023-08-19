@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func isValid(s string) bool {
 	if len(s) == 1 {
 		return false
@@ -37,4 +39,8 @@ func isValid(s string) bool {
 		isEmpty = false
 	}
 	return isEmpty
+}
+
+func main() {
+	fmt.Println("Valid Parentheses:", isValid("()[]{}"))
 }

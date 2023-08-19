@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func twoSum(nums []int, target int) []int {
 	m := make(map[int]int)
 	for i, v := range nums {
@@ -11,4 +13,8 @@ func twoSum(nums []int, target int) []int {
 		m[v] = i
 	}
 	return nil
+}
+
+func main() {
+	fmt.Println("Two Sum:", twoSum([]int{2, 7, 11, 19}, 9))
 }
