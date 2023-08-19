@@ -17,6 +17,8 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # RUN go get -x <your-dependency-or-tool>
 RUN go install github.com/pilu/fresh@latest
 
+RUN chmod -R 777 /go/pkg
+
 # TODO: move vscode to a variable; for some reason $USER_NAME didn't work
 ENV USER_NAME vscode
 ENV HOME /home/vscode
