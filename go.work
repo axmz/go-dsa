@@ -1,0 +1,8 @@
+go 1.19
+
+use (
+	.
+	./concurrency/dining
+	./concurrency/producer_consumer
+	./concurrency/sleeping-barber
+)
