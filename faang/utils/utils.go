@@ -1,9 +1,16 @@
 package utils
 
+import "fmt"
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
+}
+
+func (t *TreeNode) String() string {
+	sl := TreeToSlice(t)
+	return fmt.Sprintf("%v", sl)
 }
 
 func convertToTreeNode(m []interface{}) []*TreeNode {
@@ -15,6 +22,34 @@ func convertToTreeNode(m []interface{}) []*TreeNode {
 		}
 	}
 	return r
+}
+
+func TreeToSlice(root *TreeNode) []any {
+	if root == nil {
+		return []any{}
+	}
+
+	var result []any
+	queue := []*TreeNode{root}
+
+	for len(queue) > 0 {
+		node := queue[0]
+		queue = queue[1:]
+
+		if node != nil {
+			result = append(result, node.Val)
+			queue = append(queue, node.Left, node.Right)
+		} else {
+			result = append(result, nil)
+		}
+	}
+
+	// Remove trailing nils
+	for len(result) > 0 && result[len(result)-1] == nil {
+		result = result[:len(result)-1]
+	}
+
+	return result
 }
 
 func CreateTree(m []interface{}) *TreeNode {
