@@ -70,6 +70,37 @@ func CreateTree(m []interface{}) *TreeNode {
 	return nodes[0]
 }
 
+func CreateTreeInOrder(m []interface{}) *TreeNode {
+	if len(m) == 0 {
+		return nil
+	}
+
+	return buildInOrderTree(m, 0, len(m)-1)
+}
+
+func buildInOrderTree(m []interface{}, start, end int) *TreeNode {
+	if start > end {
+		return nil
+	}
+
+	// Find the middle element to be the root
+	mid := (start + end) / 2
+
+	// Convert the middle element to a TreeNode
+	var root *TreeNode
+	if m[mid] != nil {
+		root = &TreeNode{Val: m[mid].(int)}
+	}
+
+	// Recursively build the left and right subtrees
+	if root != nil {
+		root.Left = buildInOrderTree(m, start, mid-1)
+		root.Right = buildInOrderTree(m, mid+1, end)
+	}
+
+	return root
+}
+
 func max(x int, y int) int {
 	if x > y {
 		return x
