@@ -11,7 +11,7 @@ package main
 
 import (
 	"fmt"
-	. "godsa/faang/utils"
+	. "godsa/utils/tree"
 )
 
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {

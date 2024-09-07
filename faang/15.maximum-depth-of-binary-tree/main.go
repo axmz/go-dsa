@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	. "godsa/faang/utils"
+	. "godsa/utils/tree"
 )
 
 // [3,9,20,null,null,15,7]

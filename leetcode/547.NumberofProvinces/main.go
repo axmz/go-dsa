@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	. "godsa/leetcode/utils/disjointset"
+	. "godsa/utils/disjointset"
 )
 
 // func dfs(isConnected [][]int, visited []bool, i int) {

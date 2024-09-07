@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	. "godsa/leetcode/utils/list"
+	. "godsa/utils/list"
 )
 
 func oddEvenList(head *ListNode) *ListNode {

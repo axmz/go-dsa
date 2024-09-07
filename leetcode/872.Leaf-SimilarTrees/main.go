@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	. "godsa/faang/utils"
+	. "godsa/utils/tree"
 )
 
 func dfs(root *TreeNode, ch chan int) {
