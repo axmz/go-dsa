@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"godsa/sorting/bubble"
+	"godsa/sorting/heap"
 	"godsa/sorting/insertion"
 	"godsa/sorting/merge"
 	"godsa/sorting/quick"
@@ -17,11 +18,13 @@ func main() {
 	sorted4 := insertion.Sort2(arr)
 	sorted5 := merge.Sort(arr)
 	sorted6 := quick.Sort(arr)
+	sorted7 := heap.Sort(arr)
 	fmt.Printf("%-12s|  %v \n", "bubble", sorted1)
 	fmt.Printf("%-12s|  %v \n", "selection", sorted2)
 	fmt.Printf("%-12s|  %v \n", "insertion1", sorted3)
 	fmt.Printf("%-12s|  %v \n", "insertion2", sorted4)
 	fmt.Printf("%-12s|  %v \n", "merge", sorted5)
 	fmt.Printf("%-12s|  %v \n", "quick", sorted6)
+	fmt.Printf("%-12s|  %v \n", "heap", sorted7)
 	fmt.Printf("%-12s|  %v \n", "unsorted", arr)
 }
