@@ -10,13 +10,13 @@ func uniquePaths(m int, n int) int {
 			d[i][j] = 1
 		}
 	}
-	fmt.Println(d)
+
 	for col := 1; col < m; col++ {
 		for row := 1; row < n; row++ {
 			d[col][row] = d[col-1][row] + d[col][row-1]
 		}
 	}
-	fmt.Println(d)
+
 	return d[m-1][n-1]
 }
 
