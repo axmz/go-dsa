@@ -1,0 +1,24 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Create LeetCode Problem",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-c",
+				"mkdir -p \"${workspaceFolder}/leetcode/$(echo \"${input:leetcodeProblem}\" | tr -d '[:space:]')\" && touch \"${workspaceFolder}/leetcode/$(echo \"${input:leetcodeProblem}\" | tr -d '[:space:]')/main.go\" && code \"${workspaceFolder}/leetcode/$(echo \"${input:leetcodeProblem}\" | tr -d '[:space:]')/main.go\""
+			],
+			"problemMatcher": [],
+			"group": "build"
+		}
+	],
+	"inputs": [
+		{
+			"id": "leetcodeProblem",
+			"type": "promptString",
+			"description": "Enter LeetCode problem name (e.g., 739. Daily Temperatures)",
+			"default": ""
+		}
+	]
+}
