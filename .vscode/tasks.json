@@ -7,7 +7,10 @@
 			"command": "bash",
 			"args": [
 				"-c",
-				"mkdir -p \"${workspaceFolder}/leetcode/$(echo \"${input:leetcodeProblem}\" | tr -d '[:space:]')\" && touch \"${workspaceFolder}/leetcode/$(echo \"${input:leetcodeProblem}\" | tr -d '[:space:]')/main.go\" && code \"${workspaceFolder}/leetcode/$(echo \"${input:leetcodeProblem}\" | tr -d '[:space:]')/main.go\""
+				"dir=\"${workspaceFolder}/leetcode/$(echo \"${input:leetcodeProblem}\" | tr -d '[:space:]')\" && \
+				mkdir -p \"$dir\" && \
+				echo -e \"package main;\n\nfunc main() {\n\tx:= 0;\n\tnums := []int{};\n\tfmt.Println(x, nums)\n};\" > \"$dir/main.go\" && \
+				code \"$dir/main.go\""
 			],
 			"problemMatcher": [],
 			"group": "build"
