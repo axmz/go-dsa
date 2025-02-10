@@ -4,21 +4,12 @@ import (
 	"fmt"
 )
 
-// This can be shortened
 func moveZeroes(nums []int) {
-	for i, j := 0, 0; i < len(nums); {
-		if nums[j] == 0 && nums[i] != 0 {
+	for i, j := 0, 0; j < len(nums); j++ {
+		if nums[j] != 0 {
 			nums[i], nums[j] = nums[j], nums[i]
 			i++
-			j++
-			continue
 		}
-
-		if nums[j] != 0 {
-			j++
-		}
-
-		i++
 	}
 }
 
