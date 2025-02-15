@@ -17,9 +17,6 @@ func reverse(x int) int {
 		}
 	}
 
-	if x < 0 {
-		return -res
-	}
 	return res
 }
 
