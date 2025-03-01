@@ -5,125 +5,66 @@ import "fmt"
 type Node struct {
 	val  int
 	next *Node
+	prev *Node
 }
 
 type MyLinkedList struct {
-	head *Node
-	size int
+	sentinel *Node // Dummy node linking head and tail
+	size     int
 }
 
 func Constructor() MyLinkedList {
-	return MyLinkedList{}
+	sentinel := &Node{}      // Sentinel node
+	sentinel.next = sentinel // Points to itself when empty
+	sentinel.prev = sentinel
+	return MyLinkedList{sentinel: sentinel}
 }
 
-// func (this *MyLinkedList) print() {
-// 	s := []int{}
-// 	node := this.head
-// 	for node != nil && node.next != nil {
-// 		s = append(s, node.val)
-// 		node = node.next
-// 	}
-// 	fmt.Println(s)
-// }
-
 func (this *MyLinkedList) Get(index int) int {
-	// this.print()
 	if index >= this.size {
 		return -1
 	}
-
-	node := this.head
-
-	if node == nil {
-		return -1
-	}
-
+	node := this.sentinel.next // Start at head
 	for i := 0; i < index; i++ {
 		node = node.next
 	}
-
 	return node.val
 }
 
-func (this *MyLinkedList) AddAtHead(val int) {
-	node := Node{val: val, next: this.head}
-	this.head = &node
+func (this *MyLinkedList) AddAtIndex(index int, val int) {
+	if index > this.size {
+		return
+	}
 	this.size++
+	curr := this.sentinel
+	for i := 0; i < index; i++ { // Stop at prev node
+		curr = curr.next
+	}
+	newNode := &Node{val: val, next: curr.next, prev: curr}
+	curr.next.prev = newNode
+	curr.next = newNode
+}
+
+func (this *MyLinkedList) AddAtHead(val int) {
+	this.AddAtIndex(0, val)
 }
 
 func (this *MyLinkedList) AddAtTail(val int) {
-	node := this.head
-
-	if node == nil {
-		this.AddAtHead(val)
-		return
-	}
-
-	for node.next != nil {
-		node = node.next
-	}
-
-	node.next = &Node{val: val, next: nil}
-	this.size++
-}
-
-func (this *MyLinkedList) AddAtIndex(index int, val int) {
-	if index >= this.size {
-		return
-	}
-
-	if this.head == nil {
-		return
-	}
-
-	if index == 0 {
-		this.AddAtHead(val)
-		return
-	}
-
-	this.size++
-
-	node := this.head
-	var prev *Node
-	for i := 0; i < index; i++ {
-		prev = node
-		node = node.next
-	}
-
-	prev.next = &Node{val: val, next: node}
+	this.AddAtIndex(this.size, val)
 }
 
 func (this *MyLinkedList) DeleteAtIndex(index int) {
 	if index >= this.size {
 		return
 	}
-
 	this.size--
-
-	if index == 0 {
-		this.head = this.head.next
-		return
+	curr := this.sentinel
+	for i := 0; i < index; i++ { // Stop at prev node
+		curr = curr.next
 	}
-
-	node := this.head
-	var prev *Node
-	for i := 0; i < index; i++ {
-		prev = node
-		node = node.next
-	}
-
-	prev.next = node.next
+	curr.next = curr.next.next // Skip target node
+	curr.next.prev = curr
 }
-
-/**
- * Your MyLinkedList object will be instantiated and called as such:
- * obj := Constructor();
- * param_1 := obj.Get(index);
- * obj.AddAtHead(val);
- * obj.AddAtTail(val);
- * obj.AddAtIndex(index,val);
- * obj.DeleteAtIndex(index);
- */
 
 func main() {
 	x := 0
