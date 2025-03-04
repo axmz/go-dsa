@@ -5,7 +5,7 @@ import (
 	. "godsa/utils/tree"
 )
 
-func levelOrder(root *TreeNode) [][]int {
+func levelOrder2(root *TreeNode) [][]int {
 	if root == nil {
 		return [][]int{}
 	}
@@ -41,6 +41,59 @@ func flat(node []*TreeNode) (res []int) {
 	}
 
 	return
+}
+
+func levelOrder3(root *TreeNode) [][]int {
+	res := [][]int{}
+
+	var helper func(root *TreeNode, level int)
+	helper = func(root *TreeNode, level int) {
+		if root == nil {
+			return
+		}
+		if len(res) == level {
+			res = append(res, []int{})
+		}
+		res[level] = append(res[level], root.Val)
+		helper(root.Left, level+1)
+		helper(root.Right, level+1)
+	}
+
+	helper(root, 0)
+
+	return res
+}
+
+func levelOrder(root *TreeNode) [][]int {
+	res := make([][]int, 0)
+
+	if root == nil {
+		return res
+	}
+
+	q := make([]*TreeNode, 0)
+	q = append(q, root)
+	var pop *TreeNode
+
+	for len(q) > 0 {
+		size := len(q)
+		level := []int{}
+
+		for i := 0; i < size; i++ {
+			pop, q = q[0], q[1:]
+			level = append(level, pop.Val)
+			if pop.Left != nil {
+				q = append(q, pop.Left)
+			}
+			if pop.Right != nil {
+				q = append(q, pop.Right)
+			}
+		}
+
+		res = append(res, level)
+	}
+
+	return res
 }
 
 func main() {
