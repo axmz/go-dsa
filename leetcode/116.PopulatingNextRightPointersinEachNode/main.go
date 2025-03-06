@@ -46,7 +46,7 @@ type Node struct {
 // }
 
 // O(1) pointers traversal
-func connect(root *Node) *Node {
+func connect2(root *Node) *Node {
 	leftmost := root
 	head := leftmost
 	parent := &Node{}
@@ -70,6 +70,25 @@ func connect(root *Node) *Node {
 		}
 	}
 
+	return root
+}
+
+func connect(root *Node) *Node {
+	if root == nil {
+		return nil
+	}
+	leftmost := root
+	for leftmost.Left != nil { // While there’s a next level
+		head := leftmost
+		for head != nil { // Traverse current level
+			head.Left.Next = head.Right // Connect children
+			if head.Next != nil {
+				head.Right.Next = head.Next.Left // Connect across parents
+			}
+			head = head.Next
+		}
+		leftmost = leftmost.Left // Move to next level
+	}
 	return root
 }
 
