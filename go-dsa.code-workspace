@@ -1,0 +1,65 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cmake.configureOnOpen": false,
+		"cmake.showOptionsMovedNotification": false,
+		"workbench.colorCustomizations": {
+			"statusBarItem.remoteBackground": "#00ADD8",
+			"statusBarItem.remoteForeground": "#000000",
+			"titleBar.inactiveBackground": "#00ADD8",
+			"titleBar.inactiveForeground": "#000000",
+			"titleBar.activeBackground": "#00ADD8",
+			"titleBar.activeForeground": "#000000",
+		}
+	},
+	"launch": {
+		"configurations": [
+			{
+				"name": "Go: Launch file",
+				"type": "go",
+				"request": "launch",
+				"mode": "debug",
+				"program": "${file}"
+			}
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Create LeetCode Problem",
+				"type": "shell",
+				"options": {
+					"shell": {
+						"executable": "/bin/bash",
+						"args": [
+							"-lc"
+						]
+					}
+				},
+				"command": "bash",
+				"args": [
+					"-c",
+				"dir=\"${workspaceFolder}/leetcode/$(echo \"${input:leetcodeProblem}\" | tr -d \"[:space:]\")\" && \
+				mkdir -p \"$dir\" && \
+				echo -e \"package main;\n\nfunc main() {\n\tx:= 0;\n\tnums := []int{};\n\tfmt.Println(x, nums)\n};\" > \"$dir/main.go\" && \
+				code \"$dir/main.go\""
+				],
+				"problemMatcher": [],
+				"group": "build"
+			}
+		],
+		"inputs": [
+			{
+				"id": "leetcodeProblem",
+				"type": "promptString",
+				"description": "Enter LeetCode problem name (e.g., 739. Daily Temperatures)",
+				"default": ""
+			}
+		]
+	}
+}
