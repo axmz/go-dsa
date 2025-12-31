@@ -1,20 +1,23 @@
 package bubble
 
-// Sort bubble sort
-func Sort(originalSlice []int) []int {
-	var slc = make([]int, len(originalSlice))
-	copy(slc, originalSlice)
-	l := len(slc)
+func Sort(original []int) []int {
+	n := len(original)
+	arr := make([]int, n)
+	copy(arr, original)
 
-	for i := 1; i < l; l-- {
-		for j := 1; j < l; j++ {
-			if slc[j-1] > slc[j] {
-				temp := slc[j-1]
-				slc[j-1] = slc[j]
-				slc[j] = temp
+	for n > 1 {
+		swapped := false
+		for i := 1; i < n; i++ {
+			if arr[i-1] > arr[i] {
+				arr[i-1], arr[i] = arr[i], arr[i-1]
+				swapped = true
 			}
 		}
+		if !swapped {
+			break
+		}
+		n--
 	}
 
-	return slc
+	return arr
 }

@@ -1,23 +1,20 @@
 package selection
 
-// Sort selection sorting
-func Sort(originalArr []int) []int {
-	var arr []int
-	arr = append(arr, originalArr...)
-	l := len(arr)
+func Sort(original []int) []int {
+	n := len(original)
+	arr := make([]int, n)
+	copy(arr, original)
 
-	for i := 0; i < l; i++ {
+	for i := 0; i < n-1; i++ {
 		min := i
-
-		for j := i + 1; j < l; j++ {
+		for j := i + 1; j < n; j++ {
 			if arr[j] < arr[min] {
 				min = j
 			}
 		}
-
-		temp := arr[min]
-		arr[min] = arr[i]
-		arr[i] = temp
+		if min != i {
+			arr[i], arr[min] = arr[min], arr[i]
+		}
 	}
 
 	return arr

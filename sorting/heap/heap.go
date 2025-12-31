@@ -45,12 +45,14 @@ func Sort(nums []int) []int {
 	c := make([]int, len(nums))
 	copy(c, nums)
 
+	// last non-leaf node
 	for i := len(c)/2 - 1; i >= 0; i-- {
 		heapifyMax(c, i)
 	}
 
 	sorted := c
 
+	// swap top with last and heapify again
 	for i := len(c) - 1; i > 0; i-- {
 		c[0], c[i] = c[i], c[0]
 		c = c[:i]
@@ -64,6 +66,7 @@ func SortDesc(nums []int) []int {
 	c := make([]int, len(nums))
 	copy(c, nums)
 
+	// last non-leaf node
 	for i := len(c)/2 - 1; i >= 0; i-- {
 		heapifyMin(c, i)
 	}
