@@ -1,21 +1,11 @@
-package main
+package bst
 
 import (
 	"fmt"
-	"godsa/trees/bst"
 )
 
-func printPreOrder(n *bst.Node) {
-	if n == nil {
-		return
-	}
-	fmt.Printf("%d ", n.Value)
-	printPreOrder(n.Left)
-	printPreOrder(n.Right)
-}
-
 func main() {
-	var tree = bst.NewBst()
+	var tree = NewBst()
 	tree.Insert(9)
 	tree.Insert(4)
 	tree.Insert(6)
