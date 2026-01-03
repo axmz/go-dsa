@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 	"testing"
 
 	"godsa/sorting/bubble"
@@ -35,6 +36,10 @@ var sorts = map[string]func([]int) []int{
 	"heap":      heap.Sort,
 	"counting":  counting.Sort,
 	"bucket":    bucket.Sort,
+	"go built-in": func(arr []int) []int {
+		sort.Ints(arr)
+		return arr
+	},
 }
 
 func BenchmarkSorts(b *testing.B) {
