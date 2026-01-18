@@ -6,46 +6,45 @@ import (
 )
 
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-	if len(nums1) > len(nums2) {
-		nums1, nums2 = nums2, nums1
-	}
-
+	// X : [....minLeftX | maxRightX....]
+	// Y : [....minLeftY | maxRightY....]
 	m, n := len(nums1), len(nums2)
-	low, high := 0, m
+	if m > n {
+		return findMedianSortedArrays(nums2, nums1)
+	}
+	l, r := 0, m
+	for l <= r {
+		maxLeftX := math.MinInt64
+		minRightX := math.MaxInt64
+		maxLeftY := math.MinInt64
+		minRightY := math.MaxInt64
 
-	for low <= high {
-		partitionX := (low + high) / 2
-		partitionY := (m+n+1)/2 - partitionX
+		partitionX := l + (r-l)/2
+		partitionY := (m+n+1)/2 - partitionX // remaining elements
 
-		maxX := math.MinInt64
 		if partitionX > 0 {
-			maxX = nums1[partitionX-1]
+			maxLeftX = nums1[partitionX-1]
 		}
-
-		minX := math.MaxInt64
 		if partitionX < m {
-			minX = nums1[partitionX]
+			minRightX = nums1[partitionX]
 		}
-
-		maxY := math.MinInt64
 		if partitionY > 0 {
-			maxY = nums2[partitionY-1]
+			maxLeftY = nums2[partitionY-1]
 		}
-
-		minY := math.MaxInt64
 		if partitionY < n {
-			minY = nums2[partitionY]
+			minRightY = nums2[partitionY]
 		}
 
-		if maxX <= minY && maxY <= minX {
+		if maxLeftX <= minRightY && maxLeftY <= minRightX {
 			if (m+n)%2 == 0 {
-				return (float64(max(maxX, maxY)) + float64(min(minX, minY))) / 2.0
+				return float64(max(maxLeftX, maxLeftY)+min(minRightX, minRightY)) / 2.0
+			} else {
+				return float64(max(maxLeftX, maxLeftY))
 			}
-			return float64(max(maxX, maxY))
-		} else if maxX > minY {
-			high = partitionX - 1
+		} else if maxLeftX > minRightY {
+			r = partitionX - 1
 		} else {
-			low = partitionX + 1
+			l = partitionX + 1
 		}
 	}
 
