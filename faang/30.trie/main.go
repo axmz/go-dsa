@@ -10,75 +10,115 @@ import "fmt"
  * param_3 := obj.StartsWith(prefix);
  */
 
-type children map[rune]*Trie
+// Trie can be implemented with array or map
+// /////////////////////
+// Trie array
+// /////////////////////
 type Trie struct {
-	value    rune // value is not needed
 	end      bool
-	children children
+	children [26]*Trie
 }
 
 func Constructor() Trie {
-	return Trie{}
+	return Trie{
+		children: [26]*Trie{},
+	}
 }
 
 func (this *Trie) Insert(word string) {
-	currentTrie := this
-	for i, r := range word {
-		if t, ok := currentTrie.children[r]; ok {
-			// mark end
-			if i == len(word)-1 {
-				t.end = true
-			}
-			currentTrie = t
+	cur := this
+	for i := 0; i < len(word); i++ {
+		w := word[i] - 'a'
+		if t := cur.children[w]; t != nil {
+			cur = t
 		} else {
-			// mark end
-			isEnd := false
-			if i == len(word)-1 {
-				isEnd = true
+			cur.children[w] = &Trie{
+				children: [26]*Trie{},
 			}
-			newT := &Trie{value: r, end: isEnd}
-			if currentTrie.children == nil {
-				currentTrie.children = make(children)
-			}
-			currentTrie.children[r] = newT
-			currentTrie = newT
+			cur = cur.children[w]
 		}
 	}
+	cur.end = true // there was no need for special case if i == len(word)-1
 }
 
 func (this *Trie) Search(word string) bool {
 	current := this
-	for i, r := range word {
-		if t, ok := current.children[r]; ok {
-			if i == len(word)-1 && t.end {
-				return true
-			} else if i == len(word)-1 {
-				return false
-			} else {
-				current = t
-			}
+	for i := 0; i < len(word); i++ {
+		w := word[i] - 'a'
+		if t := current.children[w]; t != nil {
+			current = t
 		} else {
 			return false
 		}
 	}
-	return false
+	return current.end
 }
 
 func (this *Trie) StartsWith(prefix string) bool {
 	current := this
-	for i, r := range prefix {
-		if t, ok := current.children[r]; ok {
-			if i == len(prefix)-1 {
-				return true
-			} else {
-				current = t
-			}
+	for i := 0; i < len(prefix); i++ {
+		w := prefix[i] - 'a'
+		if t := current.children[w]; t != nil {
+			current = t
 		} else {
 			return false
 		}
 	}
-	return false
+	return true
 }
+
+// /////////////////
+// Trie map
+// /////////////////
+// type Trie struct {
+// 	end      bool
+// 	children map[byte]*Trie
+// }
+
+// func Constructor() Trie {
+// 	return Trie{
+// 		children: make(map[byte]*Trie),
+// 	}
+// }
+
+// func (this *Trie) Insert(word string) {
+// 	cur := this
+// 	for i := 0; i < len(word); i++ {
+// 		if t, ok := cur.children[word[i]]; ok {
+// 			cur = t
+// 		} else {
+// 			cur.children[word[i]] = &Trie{
+// 				children: make(map[byte]*Trie),
+// 			}
+// 			cur = cur.children[word[i]]
+// 		}
+// 	}
+// 	cur.end = true // there was no need for special case if i == len(word)-1
+// }
+
+// func (this *Trie) Search(word string) bool {
+// 	current := this
+// 	for i := 0; i < len(word); i++ {
+// 		if t, ok := current.children[word[i]]; ok {
+// 			current = t
+// 		} else {
+// 			return false
+// 		}
+// 	}
+// 	return current.end
+// }
+
+// func (this *Trie) StartsWith(prefix string) bool {
+// 	current := this
+// 	for i := 0; i < len(prefix); i++ {
+// 		if t, ok := current.children[prefix[i]]; ok {
+// 			current = t
+// 		} else {
+// 			return false
+// 		}
+// 	}
+// 	return true
+// }
 
 func main() {
 	trie := Constructor()
