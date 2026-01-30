@@ -15,7 +15,7 @@ import "fmt"
 // Trie array
 // /////////////////////
 type Trie struct {
-	end      bool
+	end      bool // alternatively to end bool we can store the word itself
 	children [26]*Trie
 }
 
