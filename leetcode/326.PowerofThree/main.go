@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"strconv"
 )
 
 func isPowerOfThree2(n int) bool {
@@ -35,6 +36,9 @@ func isPowerOfThree3(n int) bool {
 }
 
 func main() {
+	i, _ := strconv.ParseInt("1010", 3, 64) // numbers can be expressed in base other than 10 or 2 or 8
+	fmt.Println(i)
+
 	x := 27
 	fmt.Println(isPowerOfThree(x))
 }
