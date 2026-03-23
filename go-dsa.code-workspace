@@ -51,6 +51,28 @@
 				],
 				"problemMatcher": [],
 				"group": "build"
+			},
+			{
+				"label": "Create Hackerrank Problem",
+				"type": "shell",
+				"options": {
+					"shell": {
+						"executable": "/bin/bash",
+						"args": [
+							"-lc"
+						]
+					}
+				},
+				"command": "bash",
+				"args": [
+					"-c",
+					"dir=\"${workspaceFolder}/hackerrank/$(echo \"${input:hackerrankProblem}\" | tr -d \"[:space:]\")\" && \
+					mkdir -p \"$dir\" && \
+					echo -e \"package main;\n\nfunc main() {\n\tx:= 0;\n\tnums := []int{};\n\tfmt.Println(x, nums)\n};\" > \"$dir/main.go\" && \
+					code \"$dir/main.go\""
+				],
+				"problemMatcher": [],
+				"group": "build"
 			}
 		],
 		"inputs": [
@@ -58,6 +80,12 @@
 				"id": "leetcodeProblem",
 				"type": "promptString",
 				"description": "Enter LeetCode problem name (e.g., 739. Daily Temperatures)",
+				"default": ""
+			},
+			{
+				"id": "hackerrankProblem",
+				"type": "promptString",
+				"description": "Enter HackerRank problem name (e.g., Count Elements Greater Than Previous Average)",
 				"default": ""
 			}
 		]
