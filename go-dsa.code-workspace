@@ -11,9 +11,12 @@
 			"statusBarItem.remoteBackground": "#00ADD8",
 			"statusBarItem.remoteForeground": "#000000",
 			"titleBar.inactiveBackground": "#00ADD8",
-			"titleBar.inactiveForeground": "#000000",
+			"titleBar.inactiveForeground": "#00131A",
 			"titleBar.activeBackground": "#00ADD8",
 			"titleBar.activeForeground": "#000000",
+			"commandCenter.foreground": "#000000",
+			"commandCenter.activeForeground": "#000000",
+			"commandCenter.inactiveForeground": "#00131A",
 		}
 	},
 	"launch": {
