@@ -6,8 +6,8 @@ import (
 )
 
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-	// X : [....minLeftX | maxRightX....]
-	// Y : [....minLeftY | maxRightY....]
+	// X: [....maxLeftX | minRightX....]
+	// Y: [....maxLeftY | minRightY....]
 	m, n := len(nums1), len(nums2)
 	if m > n {
 		return findMedianSortedArrays(nums2, nums1)
