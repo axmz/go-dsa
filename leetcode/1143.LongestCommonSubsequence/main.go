@@ -10,6 +10,23 @@ func max(a, b int) int {
 	return b
 }
 
+func longestCommonSubsequence(text1 string, text2 string) int {
+	dp := make([][]int, len(text2)+1)
+	for i := range dp {
+		dp[i] = make([]int, len(text1)+1)
+	}
+	for j := len(text2) - 1; j >= 0; j-- {
+		for i := len(text1) - 1; i >= 0; i-- {
+			if text1[i] == text2[j] {
+				dp[j][i] = 1 + dp[j+1][i+1]
+			} else {
+				dp[j][i] = max(dp[j][i+1], dp[j+1][i])
+			}
+		}
+	}
+	return dp[0][0]
+}
+
 func longestCommonSubsequenceBottomUp1(text1 string, text2 string) int {
 	dp := make([][]int, len(text2)+1)
 	for i := range dp {
